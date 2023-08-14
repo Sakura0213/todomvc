@@ -6,15 +6,24 @@
     </header>
 
     <section class="main">
-      <input id="toggle-all" class="toggle-all" type="checkbox" />
+      <input
+        id="toggle-all"
+        class="toggle-all"
+        type="checkbox"
+        @click="toggleAll($event)"
+      />
       <label for="toggle-all">Mark all as complete</label>
 
       <ul class="todo-list">
-        <li v-for="todo in todos" :key="todo
-        .id" :class="{ completed: todo.complated }">
+        <li
+          v-for="todo in todos"
+          :key="todo.id"
+          :class="{ completed: todo.complated }"
+        >
           <div class="view">
-            <input class="toggle" type="checkbox" v-model="todo.complated"/>
-            <label>{{ todo.title }}</label>
+            <input class="toggle" type="checkbox" v-model="todo.complated" />
+            <!-- <label>{{ todo.title }}</label> -->
+            <label v-text="todo.title"></label>
             <button class="destroy"></button>
           </div>
           <!-- <input class="edit" value="Create a TodoMVC template" /> -->
@@ -57,6 +66,24 @@ const todos = ref([
     complated: true,
   },
 ]);
+
+//方法1 使用内联事件处理器来访问原生 DOM 事件。你可以向该处理器方法传入一个特殊的 $event 变量
+// @click="toggleAll($event)"
+function toggleAll(event) {
+  todos.value.forEach((element) => {
+    element.complated = event.target.checked;
+  });
+}
+
+//方法2：勾选复选框，修改列表中全部的复选框状态
+//<input class="toggle" type="checkbox" v-model="todo.complated" />
+//const toggleAll = ref();
+// watch(toggleAll, (newValue) => {
+//   todos.value.forEach((element) => {
+//     element.complated = newValue;
+//   });
+// });
+//
 </script>
 
 <style>
