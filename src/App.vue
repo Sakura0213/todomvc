@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const todos = ref([
   {
@@ -64,7 +64,7 @@ const todos = ref([
     id: 2,
     title: "测试内容2",
     complated: true,
-  },
+  }
 ]);
 
 //方法1 使用内联事件处理器来访问原生 DOM 事件。你可以向该处理器方法传入一个特殊的 $event 变量
@@ -75,6 +75,8 @@ function toggleAll(event) {
   });
 }
 
+
+
 //方法2：勾选复选框，修改列表中全部的复选框状态
 //<input class="toggle" type="checkbox" v-model="todo.complated" />
 //const toggleAll = ref();
@@ -84,6 +86,17 @@ function toggleAll(event) {
 //   });
 // });
 //
+
+
+//获取页面新的hash值
+//现在只能使用原生js解决，看看后续有没有方法去解决
+onMounted(() => {
+  window.addEventListener("hashchange", function () {
+    const newHash = window.location.hash.replace(/#\//, "");
+    if (["",])
+  
+});
+})
 </script>
 
 <style>
